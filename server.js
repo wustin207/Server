@@ -13,28 +13,22 @@ app.post('/api/stats', (req, res) => {
 
     //Check for required fields
     const {
-        playerName,
         playerKills,
         playerDeaths,
         totalTimer,
         heartRateAvg,
         heartRateMin,
         heartRateMax,
-        score,
-        playTime
     } = stat;
 
     //Basic field validation
     if (
-        !playerName ||
         !playerKills ||
         !playerDeaths ||
         !totalTimer ||
         heartRateAvg == null ||
         heartRateMin == null ||
-        heartRateMax == null ||
-        score == null ||
-        playTime == null
+        heartRateMax == null
     ) {
         return res.status(400).json({ error: 'Missing one or more required fields' });
     }
