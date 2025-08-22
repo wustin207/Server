@@ -10,15 +10,41 @@ let playerStats = []; // Temporary store
 //POST /api/stats - save stats
 app.post('/api/stats', (req, res) => {
     const stat = req.body;
-    if (!stat.playerName || !stat.score || !stat.playTime) {
-        return res.status(400).json({ error: 'Missing fields' });
+
+    //Check for required fields
+    const {
+        playerName,
+        playerKills,
+        playerDeaths,
+        totalTimer,
+        heartRateAvg,
+        heartRateMin,
+        heartRateMax,
+        score,
+        playTime
+    } = stat;
+
+    //Basic field validation
+    if (
+        !playerName ||
+        !playerKills ||
+        !playerDeaths ||
+        !totalTimer ||
+        heartRateAvg == null ||
+        heartRateMin == null ||
+        heartRateMax == null ||
+        score == null ||
+        playTime == null
+    ) {
+        return res.status(400).json({ error: 'Missing one or more required fields' });
     }
+
+    //Repalce previous, store only the new one
     playerStats = [stat];
-    res.status(201).json({ message: 'Stats saved (replaced)' });
+    res.status(201).json({ message: 'Stats saved (replaced)', data: stat });
 });
 
-
-//GET /api/stats - retrieve all stats
+//GET /api/stats - retrieve stats
 app.get('/api/stats', (req, res) => {
     res.json(playerStats);
 });
