@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-let playerStats = []; // Temporary store
+let playerStats = [];
 
 //POST /api/stats - save stats
 app.post('/api/stats', (req, res) => {
