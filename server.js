@@ -34,7 +34,7 @@ app.post('/api/stats', (req, res) => {
     }
 
     //Repalce previous, store only the new one
-    playerStats = [stat];
+    playerStats.push(stat);
     res.status(201).json({ message: 'Stats saved (replaced)', data: stat });
 });
 
